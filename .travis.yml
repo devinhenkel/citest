@@ -8,3 +8,17 @@ before_install:
 
 script:
     - docker run -e CI=true devinhenkel/citest npm run test -- --coverage
+
+deploy:
+    provider: elasticbeanstalk
+    region: "us-east-1"
+    app: "citest"
+    env: "Citest-env"
+    bucket_name: "elasticbeanstalk-us-east-1-581745805641"
+    bucket_path: "citest"
+    on:
+        branch: master
+
+access_key_id: $AWS_ACCESS_KEY
+secret_access_key: $AWS_SECRET_KEY
+
