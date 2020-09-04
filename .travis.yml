@@ -1,0 +1,10 @@
+sudo: required
+language: generic
+services:
+    - docker
+
+before_install:
+    - docker build -t devinhenkel/citest -f Dockerfile.dev .
+
+script:
+    - docker fun -e CI=true devinhenkel/citest npm run test -- --coverage
